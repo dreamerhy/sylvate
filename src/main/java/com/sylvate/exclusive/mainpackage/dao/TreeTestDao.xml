@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sylvate.exclusive.mainpackage.dao.TreeTestDao">
+    <select id="queryTreeTest" resultType="com.sylvate.exclusive.mainpackage.base.entity.TreeTest"
+            parameterType="com.sylvate.exclusive.mainpackage.base.entity.TreeTest">
+        SELECT ID, NODE_ID, NODE_NAME, PARENT_ID, LEVEL
+        FROM SYLVATE.TREE_TEST
+        WHERE
+        1=1
+        <choose>
+            <when test="treeTest.parentId != null and treeTest.parentId != ''">
+                AND PARENT_ID = #{treeTest.parentId}
+            </when>
+            <when test="treeTest.level != null and treeTest.level != ''">
+                AND LEVEL = #{treeTest.level}
+            </when>
+            <otherwise>
+                AND PARENT_ID IS NULL
+            </otherwise>
+        </choose>
+    </select>
+</mapper>

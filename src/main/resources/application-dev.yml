@@ -1,0 +1,46 @@
+server:
+  port: ${port}
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
+    min-response-size: 1024
+  servlet:
+    context-path: /sylvate
+    session:
+      timeout: 1200000
+spring:
+  application:
+    name: sylvate
+  session:
+    storeType: REDIS
+  redis:
+    host: 127.0.0.1   #服务器地址 你服务器或本机地址
+    port: 6379           #连接端口
+    database: 0          #数据库索引，默认0
+    password: redis     #密码
+    jedis:
+      pool:
+        max-active: 8    #连接池最大连接数(使用负值表示没有限制)
+        max-wait: -1     #最大阻塞等待时间(使用负值表示没有限制)
+        max-idle: 8      #最大空闲连接数
+        min-idle: 0      #最小空闲连接数
+    timeout: 5000        #连接超时时间（毫秒）
+  servlet:
+    multipart:
+      max-request-size: 16MB               # 最大请求大小
+      max-file-size: 16MB
+      enabled: true
+      location: ${multipart-location}
+  jackson:
+    default-property-inclusion: always #json不序列化为null的字段
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/sylvate?ignoreCase=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  main:
+    allow-circular-references: true
+mybatis-plus:
+  mapper-locations: classpath*:com/sylavte/exclusive/**/dao/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
