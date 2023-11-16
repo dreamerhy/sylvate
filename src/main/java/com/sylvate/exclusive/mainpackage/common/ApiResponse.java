@@ -1,9 +1,6 @@
 package com.sylvate.exclusive.mainpackage.common;
 
 
-
-
-
 import com.sylvate.exclusive.mainpackage.common.enums.BusinessEnum;
 
 import java.io.Serializable;
@@ -40,35 +37,35 @@ public class ApiResponse<T> implements Serializable {
     }
 
     public static <T> ApiResponse<T> data(int code, T data, String msg) {
-        return new ApiResponse(code, data, data == null ? "暂无承载数据" : msg);
+        return new ApiResponse<>(code, data, data == null ? "暂无承载数据" : msg);
     }
 
     public static <T> ApiResponse<T> success(String msg) {
-        return new ApiResponse(200, null, msg);
+        return new ApiResponse<>(200, null, msg);
     }
 
     public static <T> ApiResponse<T> fail(int code, String msg) {
-        return new ApiResponse(code, (Object) null, msg);
+        return new ApiResponse<>(code, null, msg);
     }
 
     public static <T> ApiResponse<T> fail(String msg) {
-        return new ApiResponse(400, (Object) null, msg);
+        return new ApiResponse<>(400, null, msg);
     }
 
     public static <T> ApiResponse<T> fail(BusinessEnum error) {
-        return new ApiResponse(error.getCode(), (Object) null, error.getMessage());
+        return new ApiResponse<>(error.getCode(), null, error.getMessage());
     }
 
     public static <T> ApiResponse<T> error(int code, String msg) {
-        return new ApiResponse(code, (Object) null, msg);
+        return new ApiResponse<>(code, null, msg);
     }
 
     public static <T> ApiResponse<T> error(String msg) {
-        return new ApiResponse(400, (Object) null, msg);
+        return new ApiResponse<>(400, null, msg);
     }
 
     public static <T> ApiResponse<T> error(BusinessEnum error) {
-        return new ApiResponse(error.getCode(), (Object) null, error.getMessage());
+        return new ApiResponse<>(error.getCode(), null, error.getMessage());
     }
 
     public static <T> ApiResponse<T> judge(int msg) {
